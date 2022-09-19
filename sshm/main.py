@@ -65,7 +65,7 @@ def complete():
         {
             "type": "confirm",
             "message": "此操作将生成complete文件夹, 请确认是否继续"
-            if user_lang != "zh"
+            if user_lang == "zh"
             else "This operation will generate the complete folder, please confirm whether to continue",
             "default": False,
         }
