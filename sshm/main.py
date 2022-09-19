@@ -130,6 +130,28 @@ def register(name: str, path: str):
     )
 
 
+@app.command()
+def upgrade():
+    """
+    升级sshm
+    """
+    from . import _ask
+
+    if (
+        _ask(
+            {
+                "type": "list",
+                "message": "选择升级源" if user_lang == "zh" else "Select upgrade source",
+                "choices": ["Github", "Gitee"],
+            }
+        )
+        == "Gitee"
+    ):
+        external_exec(f"pip3 install git+https://gitee.com/RhythmLian/sshm.git -U")
+    else:
+        external_exec(f"pip3 install git+https://github.com/Rhythmicc/sshm.git -U")
+
+
 def main():
     """
     注册为全局命令时, 默认采用main函数作为命令入口, 请勿将此函数用作它途.
