@@ -1,0 +1,44 @@
+#compdef sshm
+
+local cur prev
+cur=${words[CURRENT]}
+prev=${words[CURRENT-1]}
+
+(( $+functions[_sshm_args_comp] )) || 
+_sshm_args_comp() {
+    local -a opt_args
+    if [[ ${prev} == switch ]]; then
+                opt_args=(
+                    
+                )
+    elif [[ ${prev} == register ]]; then
+                opt_args=(
+                    
+                )
+else
+    _arguments -S -s '*:filename:_files'
+    return
+fi
+
+    _describe subcommand opt_args
+}
+
+(( $+functions[_sshm_main] )) || 
+_sshm_main() {
+    local -a args
+    args=(
+        --help:'获取帮助'
+        complete:'获取补全列表'
+        switch:'选择一个ssh身份'
+        register:'注册一个ssh身份'
+        upgrade:'升级sshm'
+    )
+
+    _describe -t common-commands 'common commands' args && _ret=0
+}
+
+if (( ${#words} >= 3 )); then
+    _sshm_args_comp
+else
+    _sshm_main
+fi

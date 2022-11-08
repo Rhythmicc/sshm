@@ -54,39 +54,6 @@ def switch(name: str):
 
 
 @app.command()
-def complete():
-    """
-    自动补全脚本
-    """
-    from QuickProject.Qpro import gen_complete
-    from . import _ask
-
-    if _ask(
-        {
-            "type": "confirm",
-            "message": "此操作将生成complete文件夹, 请确认是否继续"
-            if user_lang == "zh"
-            else "This operation will generate the complete folder, please confirm whether to continue",
-            "default": False,
-        }
-    ):
-        gen_complete("sshm")
-
-        if _ask(
-            {
-                "type": "confirm",
-                "message": "是否应用至全局" if user_lang == "zh" else "Apply to global",
-                "default": False,
-            }
-        ):
-            import shutil
-
-            shutil.copy("complete/fig/sshm.ts", "~/.fig/autocomplete/src/sshm.ts")
-
-            shutil.rmtree("complete")
-
-
-@app.command()
 def register(name: str, path: str):
     """
     注册一个ssh身份
