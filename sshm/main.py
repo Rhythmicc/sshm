@@ -2,7 +2,7 @@ from QuickProject.Commander import Commander
 from QuickProject import QproErrorString, is_win
 from . import *
 
-app = Commander()
+app = Commander(name)
 
 
 @app.custom_complete("name")
